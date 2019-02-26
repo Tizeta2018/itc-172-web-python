@@ -1,45 +1,63 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
-#producttype, product, review
 
-class ProductType(models.Model):
-    typename=models.CharField(max_length=255)
-    typedescription=models.CharField(max_length=255, null=True, blank=True)
+# Create your models here
+# Meeting, Meeting Minutes,Resource,Event
 
-    def __str__(self):
+class Meeting(models.Model):
+    meetingtitle=models.CharField(max_length=255)
+    meetingdate=models.CharField(max_length=255)
+    meetingtime=models.TimeField()
+    location=models.CharField(max_length=255)
+    agenda=models.TextField()
+
+    def _str_(self):
         return self.typename
+
+    class Meta:
+        db_table='meeting'
+
+class MeetingMinutes(models.Model):
+    meetingtitle=models.CharField(max_length=255)
+    meetingid=models.ForeignKey(Meeting, on_delete=models.DO_NOTHING)
+    attendance=models.ManyToManyField(User)
+    Minutestext=models.TextField()
+    
+
+
+    def _str_(self):
+        return self.meetingtitle
+
+    class Meta:
+        db_table='meetingminutes'
+
+
+class Resource(models.Model):
+    resourcename=models.CharField(max_length=255)
+    resourcetype=models.CharField(max_length=255)
+    url=models.URLField()
+    dateentered=models.DateField()
+    userid=models.ForeignKey(User, on_delete=models.CASCADE)
+    resourcedesecription=models.TextField()
+ 
+
+    def _str_(self):
+        return self.resourcename
     
     class Meta:
-        db_table='producttype'
+        db_table='resource'
 
-class Product(models.Model):
-    productname=models.CharField(max_length=255)
-    producttype=models.ForeignKey(ProductType, on_delete=models.DO_NOTHING)
-    user=models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    productentrydate=models.DateField()
-    producturl=models.URLField(null=True, blank=True)
-    productdescription=models.TextField()
-
-    def __str__(self):
-        return self.productname
+class Event(models.Model):
+    eventtitle=models.CharField(max_length=255)
+    location=models.CharField(max_length=255)
+    eventdate=models.DateField()
+    eventtime=models.TimeField()
+    eventdescription=models.TextField()
+    userid=models.ForeignKey(User,on_delete=models.CASCADE)
+        
+    def _str_(self):
+        return self.eventtitle
 
     class Meta:
-        db_table='product'
-
-class Review(models.Model):
-    reviewtitle=models.CharField(max_length=255)
-    reviewdate=models.DateField()
-    product=models.ForeignKey(Product, on_delete=models.CASCADE)
-    user=models.ManyToManyField(User)
-    reviewrating=models.SmallIntegerField()
-    reviewtext=models.TextField()
-
-    def __str__(self):
-        return self.reviewtitle
-    
-    class Meta:
-        db_table='review'
-
-# Create your models here.
+        db_table='event'
