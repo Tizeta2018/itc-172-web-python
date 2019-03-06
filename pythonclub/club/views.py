@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from.models import Meeting, MeetingMinutes, Resource, Event
+
+
 #create your views here.
 def index (request):
     return render(request, 'club/index.html')
@@ -19,3 +21,16 @@ def clubresources (request):
 def clubevents (request):
     eventss_list=Events.objects.all()
     return render (request, 'club/events.html',{'events_list': events_list})
+
+def getmeeting(request):
+    meetings_list=Meeting.objects.all()  
+    return render (request, 'club/meetings.html',{'meetings_list': meetings_list})
+
+def meetingdetail(request, id):
+    detail=get_object_or_404(Meeting, pk=id)  
+    context={'detail': detail}
+    return render (request, 'club/details.html',context= context)
+
+
+
+
