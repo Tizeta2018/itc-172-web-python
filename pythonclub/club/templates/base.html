@@ -4,10 +4,10 @@
 <title> club</title> 
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> 
-<link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css"> 
+<link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'> 
 </head> 
 <body> 
-<div class="jumbotron"> 
+<div class='jumbotron'> 
 <h1>Club Reviews</h1>
  </div> 
    <nav class="navbar navbar-default"> 
@@ -16,9 +16,10 @@
 <a class="navbar-brand" href="{% url 'index' %}">Club Reviews</a> 
 </div> 
 <ul class="nav navbar-nav"> 
-    <a class="navbar-brand" href="{% url 'resources' %}">resource</a> 
-<li>Dummy</li>
-<li>Dummy</li> 
+  <li><a class="navbar-brand" href="{% url 'resources' %}">resource</a> </li>
+  <li><a class="navbar-brand" href="{% url 'getmeeting' %}">meetings</a> </li>
+  <li><a class="navbar-brand" href="{% url 'newResource' %}">Add Resource</a> </li>
+  
 </ul> 
 </div> 
 </nav> 
